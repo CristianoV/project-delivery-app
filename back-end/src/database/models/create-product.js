@@ -4,7 +4,6 @@ const Product = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         primaryKey: true,
       },
-      // https://stackoverflow.com/questions/16295118/how-do-i-define-sequelize-string-length
       name: DataTypes.STRING(100),
       price: DataTypes.DECIMAL,
       urlImage: DataTypes.STRING(200),
