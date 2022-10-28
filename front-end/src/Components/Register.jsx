@@ -8,11 +8,11 @@ function RegisterComponent() {
   function handleDisableButton() {
     const MIN_LENGTH_PASSWORD = 6;
     const MIN_LENGTH_CHARACTERS = 12;
-    const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
+    const emailRegex = /^[a-z0-9-_.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/ig;
     const validEmail = emailRegex.test(email);
 
     return !(
-      password.length > MIN_LENGTH_PASSWORD && name.length > MIN_LENGTH_CHARACTERS
+      password.length >= MIN_LENGTH_PASSWORD && name.length >= MIN_LENGTH_CHARACTERS
        && validEmail);
   }
 
