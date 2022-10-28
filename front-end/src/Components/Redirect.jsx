@@ -1,12 +1,12 @@
-import { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+// import { useEffect } from 'react';
+// import { useHistory } from 'react-router-dom';
 
-export default function Redirect() {
-  const history = useHistory();
+// export default function RedirectLogin() {
+//   const history = useHistory();
 
-  useEffect(() => {
-    history.push('/login');
-  }, []);
+//   useEffect(() => {
+//     history.push('/login');
+//   }, [history]);
 
-  return null;
-}
+//   return null;
+// }
