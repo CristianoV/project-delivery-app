@@ -9,7 +9,7 @@ const Product = (sequelize, DataTypes) => {
       urlImage: DataTypes.STRING(200),
     }, {
       timestamps: false,
-      tableName: 'products'
+      // tableName: 'products'
     });
   
     // Product.associate = (models) => {
