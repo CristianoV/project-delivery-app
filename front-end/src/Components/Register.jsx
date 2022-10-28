@@ -12,8 +12,7 @@ function RegisterComponent() {
     const validEmail = emailRegex.test(email);
 
     return !(
-      password.length > MIN_LENGTH_PASSWORD
-       && MIN_LENGTH_CHARACTERS.length
+      password.length > MIN_LENGTH_PASSWORD && name.length > MIN_LENGTH_CHARACTERS
        && validEmail);
   }
 
