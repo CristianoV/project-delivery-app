@@ -13,7 +13,7 @@ const SalesProducts = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
       } 
     },
-      { timestamp: false, tableName: 'salesProducts' },
+      { timestamp: false },
     );
   
     SalesProducts.associate = (models) => {
