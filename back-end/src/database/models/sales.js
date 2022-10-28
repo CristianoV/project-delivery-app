@@ -24,7 +24,6 @@ const Sales = (sequelize, DataTypes) => {
   
     Sales.associate = (models) => {
     Sales.belongsTo(models.Users);
-  
     };
   
     return Sales;
