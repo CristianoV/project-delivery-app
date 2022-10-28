@@ -10,13 +10,13 @@ const User = (sequelize, DataTypes) => {
       role: DataTypes.STRING,
     }, {
       timestamps: false,
-      tableName: 'users'
+      // tableName: 'users'
     });
   
-    // User.associate = (models) => {
-    // User.hasMany(models.BlogPost,
-    //   { foreignKey: 'id', as: 'BlogPosts' });
-    // };
+    User.associate = (models) => {
+    User.hasMany(models.Sales, { foreignKey: 'user_id', as: 'user' });
+    User.hasMany(models.Sales, { foreignKey: 'seller_id', as: 'user' });
+    };
   
     return User;
   };

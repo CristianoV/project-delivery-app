@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function LoginComponent() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   function handleDisableButton() {
     const MIN_LENGTH_PASSWORD = 6;
-    const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
+    const emailRegex = /^[a-z0-9-_.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/ig;
     const validEmail = emailRegex.test(email);
 
-    return !(password.length > MIN_LENGTH_PASSWORD && validEmail);
+    return !(password.length >= MIN_LENGTH_PASSWORD && validEmail);
   }
 
   return (
@@ -23,7 +25,7 @@ function LoginComponent() {
       />
       <input
         type="password"
-        data-testid="ccommon_login__input-password"
+        data-testid="common_login__input-password"
         placeholder="*******"
         value={ password }
         onChange={ ({ target }) => setPassword(target.value) }
@@ -38,6 +40,7 @@ function LoginComponent() {
       <button
         type="button"
         data-testid="common_login__button-register"
+        onClick={ () => navigate('/register') }
       >
         Ainda não tenho uma conta
       </button>

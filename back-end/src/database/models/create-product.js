@@ -4,12 +4,12 @@ const Product = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         primaryKey: true,
       },
-      name: DataTypes.STRING(100),
+      name: DataTypes.STRING,
       price: DataTypes.DECIMAL,
-      urlImage: DataTypes.STRING(200),
+      urlImage: DataTypes.STRING,
     }, {
       timestamps: false,
-      tableName: 'products'
+      // tableName: 'products'
     });
   
     // Product.associate = (models) => {
