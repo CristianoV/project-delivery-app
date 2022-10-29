@@ -9,6 +9,8 @@ app.use((_req, res, next) => {
     next();
 });
 
+app.use('/images', express.static('public'));
+
 app.get('/coffee', (_req, res) => res.status(418).end());
 app.get('/products', clientController.getAllProducts);
 
