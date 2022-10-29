@@ -9,7 +9,7 @@ function Navbar() {
 
   return (
     <nav>
-      {pageRigth === 'client' && (
+      {pageRigth === 'costumer' && (
         <>
           <button
             type="button"
