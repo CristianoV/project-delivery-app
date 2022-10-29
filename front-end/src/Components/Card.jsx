@@ -44,8 +44,8 @@ function Card({ image, title, price, id }) {
 Card.propTypes = {
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 export default Card;
