@@ -7,7 +7,7 @@ export default function Products() {
   const [products, setProducts] = useState([]);
 
   async function getUserAccount() {
-    const { results } = await (await Axios.get('https://rickandmortyapi.com/api/character')).data;
+    const results = await (await Axios.get('http://localhost:3001/products')).data;
     return results;
   }
 
@@ -18,22 +18,13 @@ export default function Products() {
   return (
     <div>
       <Navbar />
-      {/* {products && products.map((item) => (
+      {products && products.map((item) => (
         <Card
-          image={ item.urlImage }
+          image={ item.url_Image }
           title={ item.name }
           price={ item.price }
           id={ item.id }
           key={ item.id }
-        />
-      ))} */}
-      {products && products.map((item) => (
-        <Card
-          image={ item.image }
-          title={ item.name }
-          price={ item.species }
-          id={ item.status }
-          key={ item.name }
         />
       ))}
     </div>
