@@ -16,21 +16,21 @@ const SalesProducts = (sequelize, DataTypes) => {
       { timestamp: false },
     );
   
-    SalesProducts.associate = (models) => {
-      models.Sales.belongsToMany(models.Products, {
-        through: SalesProducts,
-        foreignKey: 'sale_id',
-        otherKey: 'product_id',
-        as: 'product',
-      });
+    // SalesProducts.associate = (models) => {
+    //   models.Sales.belongsToMany(models.Products, {
+    //     through: SalesProducts,
+    //     foreignKey: 'sale_id',
+    //     otherKey: 'product_id',
+    //     as: 'product',
+    //   });
   
-      models.Products.belongsToMany(models.Sales, {
-        through: SalesProducts,
-        foreignKey: 'product_id',
-        otherKey: 'sale_id',
-        as: 'sale',
-      });
-    };
+    //   models.Products.belongsToMany(models.Sales, {
+    //     through: SalesProducts,
+    //     foreignKey: 'product_id',
+    //     otherKey: 'sale_id',
+    //     as: 'sale',
+    //   });
+    // };
   
     return SalesProducts;
   };
