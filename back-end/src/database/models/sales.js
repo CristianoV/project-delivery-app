@@ -22,9 +22,9 @@ const Sales = (sequelize, DataTypes) => {
       underscored: true,
     });
   
-    Sales.associate = (models) => {
-    Sales.belongsTo(models.Users);
-    };
+    // Sales.associate = (models) => {
+    // Sales.belongsTo(models.Users);
+    // };
   
     return Sales;
   };

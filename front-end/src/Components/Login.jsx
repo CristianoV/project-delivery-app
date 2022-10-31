@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function LoginComponent() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [wrongLogin, setwrongLogin] = useState(false);
   const navigate = useNavigate();
 
   function handleDisableButton() {
@@ -12,6 +14,34 @@ function LoginComponent() {
     const validEmail = emailRegex.test(email);
 
     return !(password.length >= MIN_LENGTH_PASSWORD && validEmail);
+  }
+
+  async function login() {
+    const STATUS_OK = 200;
+    try {
+      const { data, status } = await Axios({
+        method: 'post',
+        url: 'http://localhost:3001/login',
+        headers: {},
+        data: {
+          email, password,
+        },
+      });
+      if (status === STATUS_OK) {
+        localStorage.setItem('userLogin', JSON.stringify(data));
+        navigate('/customer/products');
+      }
+    } catch (error) {
+      setwrongLogin(true);
+    }
+
+  //   if (status === STATUS_OK) {
+  //     localStorage.setItem('userLogin', JSON.stringify(data));
+  //     navigate('/costumer/products');
+  //   } else {
+  //     console.log('passou');
+  //     setwrongLogin(true);
+  //   }
   }
 
   return (
@@ -34,6 +64,7 @@ function LoginComponent() {
         type="button"
         data-testid="common_login__button-login"
         disabled={ handleDisableButton() }
+        onClick={ () => login() }
       >
         LOGIN
       </button>
@@ -44,12 +75,13 @@ function LoginComponent() {
       >
         Ainda não tenho uma conta
       </button>
-      <h6
-        data-testid="common_login__element-invalid-email"
-      >
-        { }
-        {/* Renderização condicional. SE usuário inválido, aparecer esse elemento com qualquer mensagem. */}
-      </h6>
+      {wrongLogin && (
+        <h6
+          data-testid="common_login__element-invalid-email"
+        >
+          Não deu certo
+          {/* Renderização condicional. SE usuário inválido, aparecer esse elemento com qualquer mensagem. */}
+        </h6>)}
     </form>
   );
 }

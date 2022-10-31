@@ -6,10 +6,11 @@ const Product = (sequelize, DataTypes) => {
       },
       name: DataTypes.STRING,
       price: DataTypes.DECIMAL,
-      urlImage: DataTypes.STRING,
+      url_Image: DataTypes.STRING,
     }, {
       timestamps: false,
-      // tableName: 'products'
+      tableName: 'products',
+      undescored: true,
     });
   
     // Product.associate = (models) => {
