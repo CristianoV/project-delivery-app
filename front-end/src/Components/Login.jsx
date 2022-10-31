@@ -27,9 +27,12 @@ function LoginComponent() {
           email, password,
         },
       });
-      if (status === STATUS_OK) {
+      // console.log(data.role);
+      if (status === STATUS_OK && data.role === 'customer') {
         localStorage.setItem('userLogin', JSON.stringify(data));
         navigate('/customer/products');
+      } else {
+        navigate('/seller/orders');
       }
     } catch (error) {
       setwrongLogin(true);
@@ -80,7 +83,6 @@ function LoginComponent() {
           data-testid="common_login__element-invalid-email"
         >
           Não deu certo
-          {/* Renderização condicional. SE usuário inválido, aparecer esse elemento com qualquer mensagem. */}
         </h6>)}
     </form>
   );
