@@ -13,7 +13,7 @@ export default class App extends React.Component {
           <Route exact path="/" element={ <RedirectLogin /> } />
           <Route path="/login" element={ <Login /> } />
           <Route path="/register" element={ <RegisterComponent /> } />
-          <Route path="/costumer/products" element={ <Products /> } />
+          <Route path="/customer/products" element={ <Products /> } />
         </Routes>
       </BrowserRouter>
     );
