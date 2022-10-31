@@ -22,7 +22,7 @@ const login = async (email, password) => {
   }
   const { password: userPass, id: userId, ...userWithoutPassword } = findUser.dataValues;
   const token = tokenHelper.createToken(userWithoutPassword);
-  return {token, ...userWithoutPassword};
+  return { token, ...userWithoutPassword };
 };
 
 module.exports = { login };
