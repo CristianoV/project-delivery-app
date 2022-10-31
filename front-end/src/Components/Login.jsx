@@ -27,7 +27,7 @@ function LoginComponent() {
           email, password,
         },
       });
-      // console.log(data.role);
+      console.log(data, status);
       if (status === STATUS_OK && data.role === 'customer') {
         localStorage.setItem('userLogin', JSON.stringify(data));
         navigate('/customer/products');
