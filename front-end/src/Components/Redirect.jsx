@@ -6,7 +6,7 @@ function RedirectLogin() {
 
   useEffect(() => {
     navigate('/login');
-  }, []);
+  }, [navigate]);
 
   return (
     <h1>Redirect</h1>
