@@ -1,5 +1,6 @@
 const md5 = require('md5');
 const { User } = require('../database/models');
+const tokenHelper = require('../helpers/token');
 
 const login = async (email, password) => {
   const findUser = await User.findOne({ where: { email } });
@@ -19,7 +20,9 @@ const login = async (email, password) => {
       message: 'Invalid password',
     };
   }
-  return findUser;
+  const { password: userPass, id: userId, ...userWithoutPassword } = findUser.dataValues;
+  const token = tokenHelper.createToken(userWithoutPassword);
+  return {token, ...userWithoutPassword};
 };
 
 module.exports = { login };
