@@ -1,19 +1,11 @@
-import { useEffect, useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 function Navbar() {
-  const [user, setUser] = useState('');
   const navigation = useNavigate();
   const { pathname } = useLocation();
   const pageRigth = pathname.split('/')[1];
-  const userLocal = localStorage.getItem('user');
-
-  useEffect(() => {
-    if (userLocal) {
-      const userObj = JSON.parse(user);
-      setUser(userObj.name);
-    }
-  }, [userLocal, user]);
+  const user = localStorage.getItem('user');
+  const userObj = JSON.parse(user);
 
   return (
     <nav>
@@ -54,7 +46,7 @@ function Navbar() {
       )} */}
 
       <h1 data-testid="customer_products__element-navbar-user-full-name">
-        {user.name}
+        {userObj && userObj.name}
       </h1>
       <button
         data-testid="customer_products__element-navbar-link-logout"
