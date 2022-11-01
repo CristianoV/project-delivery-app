@@ -3,7 +3,7 @@ const SalesProducts = (sequelize, DataTypes) => {
     const SalesProducts = sequelize.define('SaleProduct', {
       saleId: {
         type: DataTypes.INTEGER,
-        primaryKey: true,  
+        primaryKey: true,
       }, 
       productId: {
         type: DataTypes.INTEGER,
