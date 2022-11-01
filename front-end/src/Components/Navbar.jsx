@@ -1,19 +1,19 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 function Navbar() {
-  const [user, setUser] = useState('');
+  // const [user, setUser] = useState('');
   const navigation = useNavigate();
   const { pathname } = useLocation();
   const pageRigth = pathname.split('/')[1];
-  const userLocal = localStorage.getItem('user');
+  const user = JSON.parse(localStorage.getItem('user'));
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (userLocal) {
       const userObj = JSON.parse(user);
       setUser(userObj.name);
     }
-  }, [userLocal, user]);
+  }, [userLocal, user]); */
 
   return (
     <nav>
