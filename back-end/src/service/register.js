@@ -25,8 +25,7 @@ const register = async (name, email, password) => {
   // created.save();
   const { password: userPass, ...userWithoutPassword } = created.dataValues;
   const token = tokenHelper.createToken(userWithoutPassword);
-  return token;
-  // return { name, email, password };
+  return { token, ...userWithoutPassword };
 };
 
 module.exports = { register };

@@ -1,31 +1,37 @@
-import { useNavigate, useLocation } from 'react-router-dom';
+// import { useEffect, useState } from 'react';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 function Navbar() {
+  // const [user, setUser] = useState('');
   const navigation = useNavigate();
   const { pathname } = useLocation();
   const pageRigth = pathname.split('/')[1];
-  const user = localStorage.getItem('userLogin');
-  const userObj = JSON.parse(user);
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  /* useEffect(() => {
+    if (userLocal) {
+      const userObj = JSON.parse(user);
+      setUser(userObj.name);
+    }
+  }, [userLocal, user]); */
 
   return (
     <nav>
       {pageRigth === 'customer' && (
         <>
-          <button
-            type="button"
+          <Link
+            to="/customer/products"
             data-testid="customer_products__element-navbar-link-products"
-            onClick={ () => navigation('/login') }
           >
             PRODUTOS
-          </button>
+          </Link>
 
-          <button
-            type="button"
+          <Link
+            to="/customer/checkout"
             data-testid="customer_products__element-navbar-link-orders"
-            onClick={ () => navigation('/login') }
           >
             MEUS PEDIDOS
-          </button>
+          </Link>
         </>
       )}
       {/* {page === 'manage' && (
@@ -48,12 +54,15 @@ function Navbar() {
       )} */}
 
       <h1 data-testid="customer_products__element-navbar-user-full-name">
-        {userObj.name}
+        {user && user.name}
       </h1>
       <button
         data-testid="customer_products__element-navbar-link-logout"
         type="button"
-        onClick={ () => navigation('/login') }
+        onClick={ () => {
+          localStorage.removeItem('user');
+          navigation('/login');
+        } }
       >
         Sair
       </button>
