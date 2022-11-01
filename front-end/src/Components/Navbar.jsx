@@ -54,7 +54,7 @@ function Navbar() {
       )} */}
 
       <h1 data-testid="customer_products__element-navbar-user-full-name">
-        {user.name}
+        {user && user.name}
       </h1>
       <button
         data-testid="customer_products__element-navbar-link-logout"
