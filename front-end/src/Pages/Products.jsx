@@ -9,12 +9,15 @@ export default function Products() {
   const navigation = useNavigate();
   const MAX_PRODUCTS = 11;
   const user = localStorage.getItem('user');
-  const { token } = JSON.parse(user);
 
   useEffect(() => {
     async function getUserAccount() {
       const STATUS_OK = 200;
       try {
+        if (!user) {
+          navigation('/login');
+        }
+        const { token } = JSON.parse(user);
         const { data, status } = await Axios({
           method: 'get',
           url: 'http://localhost:3001/products',
@@ -30,7 +33,7 @@ export default function Products() {
       }
     }
     getUserAccount();
-  }, [token, navigation]);
+  }, [user, navigation]);
 
   return (
     <div>
