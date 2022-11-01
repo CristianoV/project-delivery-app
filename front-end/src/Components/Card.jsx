@@ -3,6 +3,11 @@ import PropTypes from 'prop-types';
 
 function Card({ image, title, price, id }) {
   const [quantity, setQuantity] = useState(0);
+  const priceFormat = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  });
+
   return (
     <div>
       <img
@@ -13,7 +18,7 @@ function Card({ image, title, price, id }) {
       <div>
         <h3 data-testid={ `customer_products__element-card-title-${id}` }>{title}</h3>
         <p data-testid={ `customer_products__element-card-price-${id}` }>
-          {price}
+          {priceFormat.format(price)}
         </p>
         <div>
           <button
@@ -23,11 +28,19 @@ function Card({ image, title, price, id }) {
           >
             -
           </button>
-          <span
+          {/* <span
             data-testid={ `customer_products__input-card-quantity-${id}` }
           >
             {quantity}
-          </span>
+          </span> */}
+          <input
+            type="number"
+            data-testid={ `customer_products__input-card-quantity-${id}` }
+            name=""
+            id=""
+            value={ quantity }
+            onChange={ (e) => setQuantity(Number(e.target.value)) }
+          />
           <button
             type="button"
             data-testid={ `customer_products__button-card-add-item-${id}` }
@@ -44,7 +57,7 @@ function Card({ image, title, price, id }) {
 Card.propTypes = {
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
+  price: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
 };
 
