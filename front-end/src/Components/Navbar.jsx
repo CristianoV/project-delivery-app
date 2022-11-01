@@ -1,31 +1,29 @@
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 function Navbar() {
   const navigation = useNavigate();
   const { pathname } = useLocation();
   const pageRigth = pathname.split('/')[1];
-  const user = localStorage.getItem('userLogin');
+  const user = localStorage.getItem('user');
   const userObj = JSON.parse(user);
 
   return (
     <nav>
       {pageRigth === 'customer' && (
         <>
-          <button
-            type="button"
+          <Link
+            to="/customer/products"
             data-testid="customer_products__element-navbar-link-products"
-            onClick={ () => navigation('/login') }
           >
             PRODUTOS
-          </button>
+          </Link>
 
-          <button
-            type="button"
+          <Link
+            to="/customer/checkout"
             data-testid="customer_products__element-navbar-link-orders"
-            onClick={ () => navigation('/login') }
           >
             MEUS PEDIDOS
-          </button>
+          </Link>
         </>
       )}
       {/* {page === 'manage' && (
@@ -53,7 +51,10 @@ function Navbar() {
       <button
         data-testid="customer_products__element-navbar-link-logout"
         type="button"
-        onClick={ () => navigation('/login') }
+        onClick={ () => {
+          localStorage.removeItem('user');
+          navigation('/login');
+        } }
       >
         Sair
       </button>
