@@ -28,7 +28,7 @@ function LoginComponent() {
         },
       });
       if (status === STATUS_OK) {
-        localStorage.setItem('userLogin', JSON.stringify(data));
+        localStorage.setItem('user', JSON.stringify(data));
         navigate('/customer/products');
       }
     } catch (error) {
