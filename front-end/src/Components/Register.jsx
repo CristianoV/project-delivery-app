@@ -34,7 +34,7 @@ function RegisterComponent() {
       });
       // console.log(result);
       if (status === CREATED) {
-        localStorage.setItem('userLogin', JSON.stringify(data));
+        localStorage.setItem('user', JSON.stringify(data));
         navigate('/customer/products');
       }
     } catch (error) {
