@@ -13,7 +13,7 @@ function Card({ image, title, price, id }) {
       <div>
         <h3 data-testid={ `customer_products__element-card-title-${id}` }>{title}</h3>
         <p data-testid={ `customer_products__element-card-price-${id}` }>
-          {price.toFixed(2)}
+          {price}
         </p>
         <div>
           <button
@@ -23,18 +23,18 @@ function Card({ image, title, price, id }) {
           >
             -
           </button>
-          <span
+          {/* <span
             data-testid={ `customer_products__input-card-quantity-${id}` }
           >
             {quantity}
-          </span>
+          </span> */}
           <input
             type="number"
             data-testid={ `customer_products__input-card-quantity-${id}` }
             name=""
             id=""
             value={ quantity }
-            onChange={ (e) => setQuantity(e.target.value) }
+            onChange={ (e) => setQuantity(Number(e.target.value)) }
           />
           <button
             type="button"
@@ -52,7 +52,7 @@ function Card({ image, title, price, id }) {
 Card.propTypes = {
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
+  price: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
 };
 
