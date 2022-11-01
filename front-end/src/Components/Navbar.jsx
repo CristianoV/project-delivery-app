@@ -4,12 +4,12 @@ function Navbar() {
   const navigation = useNavigate();
   const { pathname } = useLocation();
   const pageRigth = pathname.split('/')[1];
-  const user = localStorage.getItem('provisorio');
+  const user = localStorage.getItem('userLogin');
   const userObj = JSON.parse(user);
 
   return (
     <nav>
-      {pageRigth === 'costumer' && (
+      {pageRigth === 'customer' && (
         <>
           <button
             type="button"
