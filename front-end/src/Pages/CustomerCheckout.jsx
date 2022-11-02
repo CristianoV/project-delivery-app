@@ -22,7 +22,7 @@ const produtosPedidos = [
   },
 ];
 
-export default function CustomerCheckout() {
+function CustomerCheckout() {
   const semiTotal = produtosPedidos.reduce((acc, { subTotal }) => acc + subTotal, 0);
   const [cart, setCart] = useState(produtosPedidos);
   const [total, setTotal] = useState(semiTotal);
@@ -77,3 +77,5 @@ export default function CustomerCheckout() {
     </div>
   );
 }
+
+export default CustomerCheckout;
