@@ -7,6 +7,10 @@ function DeliveryData() {
   const navigation = useNavigate();
 
   const [sellers, setSellers] = useState([]);
+  const [responsibleSeller, setResponsibleSeller] = useState('');
+  const [address, setAddress] = useState('');
+  const [adressNumber, setAdressNumber] = useState('');
+  const [deliveryData, setDeliveryData] = useState({});
 
   useEffect(() => {
     async function getSellers() {
@@ -24,6 +28,7 @@ function DeliveryData() {
         });
         if (status === STATUS_OK) {
           setSellers(data);
+          setResponsibleSeller(data[0]);
         }
       } catch (error) {
         localStorage.removeItem('user');
@@ -32,6 +37,36 @@ function DeliveryData() {
     }
     getSellers();
   }, [navigation, user]);
+
+  useEffect(() => {
+    async function getDeliveryData() {
+      setDeliveryData({ responsibleSeller, address, adressNumber });
+    }
+    getDeliveryData();
+  }, [responsibleSeller, address, adressNumber]);
+
+  const finishOrder = async (orderData) => {
+    const STATUS_CREATED = 201;
+    try {
+      if (!user) {
+        navigation('/login');
+      }
+      const { token } = JSON.parse(user);
+      const { status } = await Axios({
+        method: 'post',
+        url: 'http://localhost:3001/sales',
+        headers: { authorization: token },
+        data: orderData,
+      });
+      if (status === STATUS_CREATED) {
+        navigation('/products');
+      }
+    } catch (error) {
+      /* localStorage.removeItem('user');
+      navigation('/login'); */
+      console.log(error);
+    }
+  };
 
   return (
     <section>
@@ -43,6 +78,7 @@ function DeliveryData() {
             name="sellers"
             id="sellers"
             data-testid="customer_checkout__select-seller"
+            onChange={ ({ target }) => setResponsibleSeller(target.value) }
           >
             {sellers.map((seller, id) => (
               <option value={ seller } key={ id }>{seller}</option>
@@ -55,6 +91,7 @@ function DeliveryData() {
             type="text"
             id="address"
             data-testid="customer_checkout__input-address"
+            onChange={ ({ target }) => setAddress(target.value) }
           />
         </label>
         <label htmlFor="addressNumber">
@@ -63,14 +100,16 @@ function DeliveryData() {
             type="number"
             id="addressNumber"
             data-testid="customer_checkout__input-address-number"
+            onChange={ ({ target }) => setAdressNumber(target.value) }
           />
         </label>
         <label htmlFor="submitOrder">
           <input
-            type="submit"
+            type="button"
             id="submitOrder"
             data-testid="customer_checkout__button-submit-order"
             value="Finalizar Pedido"
+            onClick={ () => finishOrder(deliveryData) }
           />
         </label>
       </form>
