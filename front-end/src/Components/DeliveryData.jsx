@@ -1,6 +1,38 @@
-const sellers = ['davi', 'liesli'];
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Axios from 'axios';
 
 function DeliveryData() {
+  const user = localStorage.getItem('user');
+  const navigation = useNavigate();
+
+  const [sellers, setSellers] = useState([]);
+
+  useEffect(() => {
+    async function getSellers() {
+      const STATUS_OK = 200;
+      try {
+        if (!user) {
+          navigation('/login');
+        }
+        const { token } = JSON.parse(user);
+        const { data, status } = await Axios({
+          method: 'get',
+          url: 'http://localhost:3001/users/sellers',
+          headers: { authorization: token },
+          data: {},
+        });
+        if (status === STATUS_OK) {
+          setSellers(data);
+        }
+      } catch (error) {
+        localStorage.removeItem('user');
+        navigation('/login');
+      }
+    }
+    getSellers();
+  }, [navigation, user]);
+
   return (
     <section>
       <h3>Detalhes e Endereço de Entrega</h3>
