@@ -27,8 +27,8 @@ function DeliveryData() {
           data: {},
         });
         if (status === STATUS_OK) {
-          setSellers(data);
-          setResponsibleSeller(data[0]);
+          setSellers(data.map((item) => item.name));
+          setResponsibleSeller(data[0].name);
         }
       } catch (error) {
         localStorage.removeItem('user');
