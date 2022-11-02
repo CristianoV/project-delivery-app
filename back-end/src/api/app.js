@@ -3,6 +3,7 @@ const cors = require('cors');
 const loginController = require('../controller/login');
 const registerController = require('../controller/register');
 const clientController = require('../controller/clientController');
+const userController = require('../controller/userController');
 const { validateToken } = require('../middleware/validateToken');
 
 const app = express();
@@ -16,5 +17,7 @@ app.get('/products', validateToken, clientController.getAllProducts);
 
 app.post('/login', loginController.login);
 app.post('/register', registerController.register);
+
+app.get('/users/sellers', validateToken, userController.getSellers);
 
 module.exports = app;
