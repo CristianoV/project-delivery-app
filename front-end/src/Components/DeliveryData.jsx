@@ -17,6 +17,30 @@ function DeliveryData() {
             ))}
           </select>
         </label>
+        <label htmlFor="address">
+          Endereço de Entrega:
+          <input
+            type="text"
+            id="address"
+            data-testid="customer_checkout__input-address"
+          />
+        </label>
+        <label htmlFor="addressNumber">
+          Número:
+          <input
+            type="number"
+            id="addressNumber"
+            data-testid="customer_checkout__input-address-number"
+          />
+        </label>
+        <label htmlFor="submitOrder">
+          <input
+            type="submit"
+            id="submitOrder"
+            data-testid="customer_checkout__button-submit-order"
+            value="Finalizar Pedido"
+          />
+        </label>
       </form>
     </section>
   );
