@@ -1,6 +1,39 @@
+import { /* useContext, */ useState/* , useEffect  */ } from 'react';
+import CheckoutCard from '../Components/CheckoutCard';
 import Navbar from '../Components/Navbar';
 
+const produtosPedidos = [
+  {
+    id: 1,
+    productId: 1,
+    name: 'heineken',
+    quantity: 2,
+    unitPrice: 5.5,
+    subTotal: 11,
+  },
+  {
+    id: 2,
+    productId: 2,
+    name: 'tequila',
+    quantity: 3,
+    unitPrice: 5,
+    subTotal: 15,
+  },
+];
+
 export default function CustomerCheckout() {
+  const semiTotal = produtosPedidos.reduce((acc, { subTotal }) => acc + subTotal, 0);
+  const [cart, setCart] = useState(produtosPedidos);
+  const [total, setTotal] = useState(semiTotal);
+
+  const removeItem = (id) => {
+    const newCart = cart.filter((item) => item.id !== id);
+    setTotal(newCart.reduce((acc, { subTotal }) => acc + subTotal, 0));
+    setCart(newCart);
+
+    return true;
+  };
+
   return (
     <div>
       <Navbar />
@@ -17,56 +50,28 @@ export default function CustomerCheckout() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td
-              data-testid="customer_checkout__element-order-table-item-number-1"
-            >
-              1
-            </td>
-            <td
-              data-testid="customer_checkout__element-order-table-name-1"
-            >
-              Stella Artois 275ml
-            </td>
-            <td>Body3 linha1</td>
-            <td>Body1 linha1</td>
-            <td>Body2 linha1</td>
-            <td>Body3 linha1</td>
-          </tr>
-          <tr>
-            <td
-              data-testid="customer_checkout__element-order-table-item-number-2"
-            >
-              2
-            </td>
-            <td
-              data-testid="customer_checkout__element-order-table-name-2"
-            >
-              Heineken 600ml
-            </td>
-            <td>Body3 linha1</td>
-            <td>Body1 linha1</td>
-            <td>Body2 linha1</td>
-            <td>Body3 linha1</td>
-          </tr>
-          <tr>
-            <td
-              data-testid="customer_checkout__element-order-table-item-number-3"
-            >
-              3
-            </td>
-            <td
-              data-testid="customer_checkout__element-order-table-name-3"
-            >
-              Skol Lata 250ml
-            </td>
-            <td>Body3 linha1</td>
-            <td>Body1 linha1</td>
-            <td>Body2 linha1</td>
-            <td>Body3 linha1</td>
-          </tr>
+          {cart.map((product) => {
+            const { id, name, quantity, unitPrice, subTotal } = product;
+            return (
+              <CheckoutCard
+                id={ id }
+                name={ name }
+                quantity={ quantity }
+                unitPrice={ unitPrice }
+                subTotal={ subTotal }
+                removeItem={ removeItem }
+                key={ id }
+              />
+            );
+          })}
         </tbody>
       </table>
+      <div
+        data-testid="customer_checkout__element-order-total-price"
+      >
+        Total: R$
+        {total}
+      </div>
     </div>
   );
 }
