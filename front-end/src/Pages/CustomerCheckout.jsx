@@ -1,5 +1,6 @@
 import { /* useContext, */ useState/* , useEffect  */ } from 'react';
 import CheckoutCard from '../Components/CheckoutCard';
+import DeliveryData from '../Components/DeliveryData';
 import Navbar from '../Components/Navbar';
 
 const produtosPedidos = [
@@ -72,6 +73,7 @@ export default function CustomerCheckout() {
         Total: R$
         {total}
       </div>
+      <DeliveryData />
     </div>
   );
 }
