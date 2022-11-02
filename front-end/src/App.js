@@ -15,6 +15,9 @@ function App() {
       return setSaller([...saller, x]);
     }
     newSaller[0].quantity = x.quantity;
+    if (newSaller[0].quantity === 0) {
+      return setSaller(saller.filter((item) => item.id !== x.id));
+    }
     return setSaller([...saller]);
   };
 
