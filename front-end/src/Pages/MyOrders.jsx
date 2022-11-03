@@ -13,9 +13,9 @@ function MyOrders() {
     async function getOrders() {
       const STATUS_OK = 200;
       try {
-        if (!user) {
-          navigation('/login');
-        }
+        // if (!user) {
+        //   navigation('/login');
+        // }
         const { token } = JSON.parse(user);
         const { data, status } = await Axios({
           method: 'get',
@@ -27,8 +27,8 @@ function MyOrders() {
           setSales(data);
         }
       } catch (error) {
-        localStorage.removeItem('user');
-        navigation('/login');
+        // localStorage.removeItem('user');
+        // navigation('/login');
       }
     }
     getOrders();
