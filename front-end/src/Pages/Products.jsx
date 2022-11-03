@@ -1,20 +1,39 @@
 import { useEffect, useState } from 'react';
 import Axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../Components/Navbar';
 import Card from '../Components/Card';
 
 export default function Products() {
   const [products, setProducts] = useState([]);
+  const navigation = useNavigate();
   const MAX_PRODUCTS = 11;
-
-  async function getUserAccount() {
-    const results = await (await Axios.get('http://localhost:3001/products')).data;
-    return results;
-  }
+  const user = localStorage.getItem('user');
 
   useEffect(() => {
-    getUserAccount().then((x) => setProducts(x));
-  }, []);
+    async function getUserAccount() {
+      const STATUS_OK = 200;
+      try {
+        if (!user) {
+          navigation('/login');
+        }
+        const { token } = JSON.parse(user);
+        const { data, status } = await Axios({
+          method: 'get',
+          url: 'http://localhost:3001/products',
+          headers: { authorization: token },
+          data: {},
+        });
+        if (status === STATUS_OK) {
+          setProducts(data);
+        }
+      } catch (error) {
+        localStorage.removeItem('user');
+        navigation('/login');
+      }
+    }
+    getUserAccount();
+  }, [user, navigation]);
 
   return (
     <div>

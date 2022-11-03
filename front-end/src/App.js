@@ -4,6 +4,7 @@ import RedirectLogin from './Components/Redirect';
 import Login from './Components/Login';
 import RegisterComponent from './Components/Register';
 import Products from './Pages/Products';
+import CustomerCheckout from './Pages/CustomerCheckout';
 
 export default class App extends React.Component {
   render() {
@@ -13,6 +14,7 @@ export default class App extends React.Component {
           <Route exact path="/" element={ <RedirectLogin /> } />
           <Route path="/login" element={ <Login /> } />
           <Route path="/register" element={ <RegisterComponent /> } />
+          <Route path="/customer/checkout" element={ <CustomerCheckout /> } />
           <Route path="/customer/products" element={ <Products /> } />
         </Routes>
       </BrowserRouter>
