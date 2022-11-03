@@ -9,7 +9,7 @@ function DeliveryData({ totalPrice }) {
 
   const [sellers, setSellers] = useState([]);
   const [sellerId, setSellerId] = useState(0);
-  const [deliveryAdress, setDeliveryAddress] = useState('');
+  const [deliveryAddress, setDeliveryAddress] = useState('');
   const [deliveryNumber, setDeliveryNumber] = useState('');
   const [deliveryData, setDeliveryData] = useState({});
 
@@ -42,10 +42,10 @@ function DeliveryData({ totalPrice }) {
 
   useEffect(() => {
     async function getDeliveryData() {
-      setDeliveryData({ sellerId, deliveryAdress, deliveryNumber });
+      setDeliveryData({ sellerId, deliveryAddress, deliveryNumber });
     }
     getDeliveryData();
-  }, [sellerId, deliveryAdress, deliveryNumber]);
+  }, [sellerId, deliveryAddress, deliveryNumber]);
 
   const finishOrder = async (orderData) => {
     const STATUS_CREATED = 201;
