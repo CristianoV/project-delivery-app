@@ -3,6 +3,7 @@ import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../Components/Navbar';
 import Card from '../Components/Card';
+import CartShopping from '../Components/CartShopping';
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -38,6 +39,7 @@ export default function Products() {
   return (
     <div>
       <Navbar />
+      <CartShopping />
       {products && products.map((item, index) => {
         if (index <= MAX_PRODUCTS) {
           return (

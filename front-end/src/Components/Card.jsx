@@ -1,12 +1,19 @@
-import { useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import MyContext from '../context/store';
 
 function Card({ image, title, price, id }) {
   const [quantity, setQuantity] = useState(0);
+  const theme = useContext(MyContext);
+
   const priceFormat = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
   });
+
+  useEffect(() => {
+    theme.spendInheritance({ id, quantity, price });
+  }, [quantity, id, price]);
 
   return (
     <div>
@@ -24,22 +31,22 @@ function Card({ image, title, price, id }) {
           <button
             type="button"
             data-testid={ `customer_products__button-card-rm-item-${id}` }
-            onClick={ () => quantity !== 0 && setQuantity(quantity - 1) }
+            onClick={ () => quantity > 0 && setQuantity(quantity - 1) }
           >
             -
           </button>
-          {/* <span
-            data-testid={ `customer_products__input-card-quantity-${id}` }
-          >
-            {quantity}
-          </span> */}
           <input
             type="number"
             data-testid={ `customer_products__input-card-quantity-${id}` }
             name=""
+            min={ 0 }
             id=""
             value={ quantity }
-            onChange={ (e) => setQuantity(Number(e.target.value)) }
+            onChange={ (e) => {
+              if (e.target.value >= 0) {
+                setQuantity(Number(e.target.value));
+              }
+            } }
           />
           <button
             type="button"
@@ -57,7 +64,7 @@ function Card({ image, title, price, id }) {
 Card.propTypes = {
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
+  price: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
 };
 
