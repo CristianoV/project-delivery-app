@@ -1,7 +1,8 @@
-import { /* useContext, */ useState/* , useEffect  */ } from 'react';
+import { useContext, useState/* , useEffect  */ } from 'react';
 import CheckoutCard from '../Components/CheckoutCard';
 import DeliveryData from '../Components/DeliveryData';
 import Navbar from '../Components/Navbar';
+import MyContext from '../context/store';
 
 const produtosPedidos = [
   {
@@ -26,6 +27,9 @@ function CustomerCheckout() {
   const semiTotal = produtosPedidos.reduce((acc, { subTotal }) => acc + subTotal, 0);
   const [cart, setCart] = useState(produtosPedidos);
   const [total, setTotal] = useState(semiTotal);
+  const theme = useContext(MyContext);
+
+  console.log(theme);
 
   const removeItem = (id) => {
     const newCart = cart.filter((item) => item.id !== id);

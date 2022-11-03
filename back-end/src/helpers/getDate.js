@@ -16,4 +16,4 @@ const getDateForNewSale = () => {
   return utcDate;
 };
 
-export default getDateForNewSale;
+module.exports = getDateForNewSale;
