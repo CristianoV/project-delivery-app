@@ -73,7 +73,7 @@ function CustomerCheckout() {
         Total: R$
         {total}
       </div>
-      <DeliveryData />
+      <DeliveryData totalPrice={ total } />
     </div>
   );
 }

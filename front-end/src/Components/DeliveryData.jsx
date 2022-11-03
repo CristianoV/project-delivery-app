@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Axios from 'axios';
 
-function DeliveryData() {
+function DeliveryData({ totalPrice }) {
   const user = localStorage.getItem('user');
   const navigation = useNavigate();
 
   const [sellers, setSellers] = useState([]);
-  const [responsibleSeller, setResponsibleSeller] = useState('');
-  const [address, setAddress] = useState('');
-  const [adressNumber, setAdressNumber] = useState('');
+  const [sellerId, setSellerId] = useState(0);
+  const [deliveryAdress, setDeliveryAddress] = useState('');
+  const [deliveryNumber, setDeliveryNumber] = useState('');
   const [deliveryData, setDeliveryData] = useState({});
 
   useEffect(() => {
@@ -27,8 +28,9 @@ function DeliveryData() {
           data: {},
         });
         if (status === STATUS_OK) {
-          setSellers(data.map((item) => item.name));
-          setResponsibleSeller(data[0].name);
+          setSellers(data);
+
+          setSellerId(data[0].id);
         }
       } catch (error) {
         localStorage.removeItem('user');
@@ -40,10 +42,10 @@ function DeliveryData() {
 
   useEffect(() => {
     async function getDeliveryData() {
-      setDeliveryData({ responsibleSeller, address, adressNumber });
+      setDeliveryData({ sellerId, deliveryAdress, deliveryNumber });
     }
     getDeliveryData();
-  }, [responsibleSeller, address, adressNumber]);
+  }, [sellerId, deliveryAdress, deliveryNumber]);
 
   const finishOrder = async (orderData) => {
     const STATUS_CREATED = 201;
@@ -51,15 +53,16 @@ function DeliveryData() {
       if (!user) {
         navigation('/login');
       }
-      const { token } = JSON.parse(user);
-      const { status } = await Axios({
+      const { id: userId, token } = JSON.parse(user);
+      const { data, status } = await Axios({
         method: 'post',
         url: 'http://localhost:3001/sales',
         headers: { authorization: token },
-        data: orderData,
+        data: { userId, totalPrice, ...orderData },
       });
       if (status === STATUS_CREATED) {
-        navigation('/products');
+        console.log(data);
+        /* navigation(`/customer/orders/:${data.id}`); */
       }
     } catch (error) {
       /* localStorage.removeItem('user');
@@ -78,10 +81,10 @@ function DeliveryData() {
             name="sellers"
             id="sellers"
             data-testid="customer_checkout__select-seller"
-            onChange={ ({ target }) => setResponsibleSeller(target.value) }
+            onChange={ ({ target }) => setSellerId(target.value) }
           >
-            {sellers.map((seller, id) => (
-              <option value={ seller } key={ id }>{seller}</option>
+            {sellers.map(({ id, name }) => (
+              <option value={ id } key={ id }>{name}</option>
             ))}
           </select>
         </label>
@@ -91,7 +94,7 @@ function DeliveryData() {
             type="text"
             id="address"
             data-testid="customer_checkout__input-address"
-            onChange={ ({ target }) => setAddress(target.value) }
+            onChange={ ({ target }) => setDeliveryAddress(target.value) }
           />
         </label>
         <label htmlFor="addressNumber">
@@ -100,7 +103,7 @@ function DeliveryData() {
             type="number"
             id="addressNumber"
             data-testid="customer_checkout__input-address-number"
-            onChange={ ({ target }) => setAdressNumber(target.value) }
+            onChange={ ({ target }) => setDeliveryNumber(target.value) }
           />
         </label>
         <label htmlFor="submitOrder">
@@ -116,5 +119,9 @@ function DeliveryData() {
     </section>
   );
 }
+
+DeliveryData.propTypes = {
+  totalPrice: PropTypes.number.isRequired,
+};
 
 export default DeliveryData;
