@@ -24,11 +24,14 @@ function CartShopping() {
     <div>
       <button
         type="button"
-        data-testid="customer_products__checkout-bottom-value"
+        data-testid="customer_products__button-cart"
         onClick={ () => navigation('/customer/checkout') }
-        // disabled={ total === 0 }
+        disabled={ total === 0 }
       >
-        {`Preço total: ${priceFormat.format(total)}`}
+        Preço total:
+        <span data-testid="customer_products__checkout-bottom-value">
+          {priceFormat.format(total)}
+        </span>
       </button>
     </div>
   );
