@@ -5,7 +5,6 @@ const salesService = {
   createSale: async (sale) => {
     try {
       const { userId, totalPrice, sellerId, deliveryAddress, deliveryNumber } = sale;
-
       const newSale = await Sale.create(
         {
           userId,
