@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import RedirectLogin from './Components/Redirect';
-import Login from './Components/Login';
-import RegisterComponent from './Components/Register';
+import Login from './Pages/Login';
+import RegisterComponent from './Pages/Register';
 import Products from './Pages/Products';
 import MyContext from './context/store';
 
