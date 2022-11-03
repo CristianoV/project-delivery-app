@@ -1,38 +1,6 @@
 import PropTypes from 'prop-types';
-/* import { useState } from 'react'; */
-
-/* const produtosPedidos = [
-  {
-    id: 1,
-    productId: 1,
-    name: 'heineken',
-    quantity: 2,
-    unitPrice: 5.5,
-    subTotal: 11,
-  },
-  {
-    id: 2,
-    productId: 2,
-    name: 'tequila',
-    quantity: 3,
-    unitPrice: 5,
-    subTotal: 15,
-  },
-]; */
 
 function CheckoutCard({ id, name, quantity, unitPrice, subTotal, removeItem }) {
-  /* const semiTotal = produtosPedidos.reduce((acc, curr) => acc + curr.subTotal, 0);
-  const [cart, setCart] = useState(produtosPedidos);
-  const [total, setTotal] = useState(semiTotal);
-
-  function removeItem(ID) {
-    const newCart = cart.filter((item) => item.id !== ID);
-    setTotal(newCart.reduce((acc, curr) => acc + curr.subTotal, 0));
-    setCart(newCart);
-
-    return true;
-  } */
-
   return (
     <tr key={ id }>
       <td
