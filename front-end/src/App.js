@@ -4,6 +4,7 @@ import RedirectLogin from './Components/Redirect';
 import Login from './Components/Login';
 import RegisterComponent from './Components/Register';
 import Products from './Pages/Products';
+import CustomerCheckout from './Pages/CustomerCheckout';
 import MyContext from './context/store';
 
 function App() {
@@ -35,6 +36,14 @@ function App() {
           element={
             <MyContext.Provider value={ value }>
               <Products />
+            </MyContext.Provider>
+          }
+        />
+        <Route
+          path="/customer/checkout"
+          element={
+            <MyContext.Provider value={ value }>
+              <CustomerCheckout />
             </MyContext.Provider>
           }
         />
