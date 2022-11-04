@@ -1,6 +1,13 @@
 import PropTypes from 'prop-types';
 
-function CheckoutCard({ id, name, quantity, unitPrice, subTotal, removeItem }) {
+function CheckoutCard(
+  { id, name, quantity, unitPrice, subTotal, removeItem, productId },
+) {
+  const priceFormat = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  });
+  const ONE = 1;
   return (
     <tr key={ id }>
       <td
@@ -8,7 +15,7 @@ function CheckoutCard({ id, name, quantity, unitPrice, subTotal, removeItem }) {
           `customer_checkout__element-order-table-item-number-${id}`
         }
       >
-        {id}
+        {id + ONE}
       </td>
       <td
         data-testid={ `customer_checkout__element-order-table-name-${id}` }
@@ -27,14 +34,14 @@ function CheckoutCard({ id, name, quantity, unitPrice, subTotal, removeItem }) {
           `customer_checkout__element-order-table-unit-price-${id}`
         }
       >
-        {unitPrice}
+        {priceFormat.format(unitPrice)}
       </td>
       <td
         data-testid={
           `customer_checkout__element-order-table-sub-total-${id}`
         }
       >
-        {subTotal}
+        {priceFormat.format(subTotal)}
       </td>
       <td>
         <button
@@ -42,7 +49,7 @@ function CheckoutCard({ id, name, quantity, unitPrice, subTotal, removeItem }) {
           data-testid={
             `customer_checkout__element-order-table-remove-${id}`
           }
-          onClick={ () => removeItem(id) }
+          onClick={ () => removeItem(productId) }
         >
           Remover
         </button>
@@ -58,6 +65,7 @@ CheckoutCard.propTypes = {
   unitPrice: PropTypes.number.isRequired,
   subTotal: PropTypes.number.isRequired,
   removeItem: PropTypes.func.isRequired,
+  productId: PropTypes.number.isRequired,
 };
 
 export default CheckoutCard;
