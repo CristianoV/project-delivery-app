@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Axios from 'axios';
 
-function DeliveryData({ totalPrice }) {
+function DeliveryData({ totalPrice, cart }) {
   const user = localStorage.getItem('user');
   const navigation = useNavigate();
 
@@ -42,13 +42,14 @@ function DeliveryData({ totalPrice }) {
 
   useEffect(() => {
     async function getDeliveryData() {
-      setDeliveryData({ sellerId, deliveryAddress, deliveryNumber });
+      setDeliveryData({ sellerId, deliveryAddress, deliveryNumber, cart });
     }
     getDeliveryData();
-  }, [sellerId, deliveryAddress, deliveryNumber]);
+  }, [sellerId, deliveryAddress, deliveryNumber, cart]);
 
   const finishOrder = async (orderData) => {
     const STATUS_CREATED = 201;
+    console.log(orderData);
     try {
       if (!user) {
         navigation('/login');
@@ -61,12 +62,9 @@ function DeliveryData({ totalPrice }) {
         data: { userId, totalPrice, ...orderData },
       });
       if (status === STATUS_CREATED) {
-        console.log(data);
-        /* navigation(`/customer/orders/:${data.id}`); */
+        navigation(`/customer/orders/${data.id}`);
       }
     } catch (error) {
-      /* localStorage.removeItem('user');
-      navigation('/login'); */
       console.log(error);
     }
   };
@@ -106,15 +104,15 @@ function DeliveryData({ totalPrice }) {
             onChange={ ({ target }) => setDeliveryNumber(target.value) }
           />
         </label>
-        <label htmlFor="submitOrder">
-          <input
-            type="button"
-            id="submitOrder"
-            data-testid="customer_checkout__button-submit-order"
-            value="Finalizar Pedido"
-            onClick={ () => finishOrder(deliveryData) }
-          />
-        </label>
+        <button
+          type="button"
+          id="submitOrder"
+          data-testid="customer_checkout__button-submit-order"
+          value="Finalizar Pedido"
+          onClick={ () => finishOrder(deliveryData) }
+        >
+          Finalizar Pedido
+        </button>
       </form>
     </section>
   );
@@ -122,6 +120,7 @@ function DeliveryData({ totalPrice }) {
 
 DeliveryData.propTypes = {
   totalPrice: PropTypes.number.isRequired,
+  cart: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 };
 
 export default DeliveryData;
