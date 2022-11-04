@@ -22,5 +22,6 @@ app.post('/register', registerController.register);
 app.get('/users/sellers', validateToken, userController.getSellers);
 
 app.post('/sales', validateToken, salesController.createSale);
+app.get('/sales', validateToken, salesController.getSales);
 
 module.exports = app;
