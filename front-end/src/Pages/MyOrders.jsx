@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Axios from 'axios';
 import CardOrders from '../Components/CardOrders';
 import Navbar from '../Components/Navbar';
 
@@ -13,13 +14,10 @@ function MyOrders() {
     async function getOrders() {
       const STATUS_OK = 200;
       try {
-        // if (!user) {
-        //   navigation('/login');
-        // }
-        const { token } = JSON.parse(user);
+        const { token, id } = JSON.parse(user);
         const { data, status } = await Axios({
           method: 'get',
-          url: 'http://localhost:3001/sales',
+          url: `http://localhost:3001/sales/${id}`,
           headers: { authorization: token },
           data: {},
         });
@@ -27,12 +25,12 @@ function MyOrders() {
           setSales(data);
         }
       } catch (error) {
-        // localStorage.removeItem('user');
-        // navigation('/login');
+        localStorage.removeItem('user');
+        navigation('/login');
       }
     }
     getOrders();
-  }, [user, navigation]);
+  }, [navigation, user]);
   return (
     <div>
       <Navbar />
