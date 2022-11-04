@@ -25,9 +25,6 @@ function CustomerCheckout() {
   }, [theme.saller]);
 
   const removeItem = (id) => {
-    /* const newCart = cart.filter((item) => item.id !== id);
-    setTotal(newCart.reduce((acc, { subTotal }) => acc + subTotal, 0));
-    setCart(newCart); */
     theme.spendInheritance({ id, quantity: 0 });
 
     return true;
@@ -60,6 +57,7 @@ function CustomerCheckout() {
                 unitPrice={ price }
                 subTotal={ subTotal }
                 removeItem={ removeItem }
+                productId={ id }
                 key={ id }
               />
             );
@@ -72,7 +70,7 @@ function CustomerCheckout() {
         Total:
         {priceFormat.format(total)}
       </div>
-      <DeliveryData totalPrice={ total } />
+      <DeliveryData totalPrice={ total } cart={ theme.saller } />
     </div>
   );
 }
