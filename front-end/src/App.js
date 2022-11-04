@@ -6,6 +6,7 @@ import RegisterComponent from './Pages/Register';
 import Products from './Pages/Products';
 import CustomerCheckout from './Pages/CustomerCheckout';
 import MyContext from './context/store';
+import OrderById from './Pages/OrderById';
 
 function App() {
   const [saller, setSaller] = useState([]);
@@ -31,6 +32,7 @@ function App() {
         <Route exact path="/" element={ <RedirectLogin /> } />
         <Route path="/login" element={ <Login /> } />
         <Route path="/register" element={ <RegisterComponent /> } />
+        <Route path="/customer/orders/:id" element={ <OrderById /> } />
 
         <Route
           path="/customer/products"
