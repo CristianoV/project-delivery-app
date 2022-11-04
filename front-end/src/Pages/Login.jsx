@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,6 +7,13 @@ function LoginComponent() {
   const [password, setPassword] = useState('');
   const [wrongLogin, setwrongLogin] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+    if (user) {
+      navigate('/customer/products');
+    }
+  }, [navigate]);
 
   function handleDisableButton() {
     const MIN_LENGTH_PASSWORD = 6;
