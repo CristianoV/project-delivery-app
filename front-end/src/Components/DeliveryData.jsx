@@ -49,7 +49,6 @@ function DeliveryData({ totalPrice, cart }) {
 
   const finishOrder = async (orderData) => {
     const STATUS_CREATED = 201;
-    console.log(orderData);
     try {
       if (!user) {
         navigation('/login');
@@ -91,14 +90,18 @@ function DeliveryData({ totalPrice, cart }) {
           <input
             type="text"
             id="address"
+            value={ deliveryAddress }
             data-testid="customer_checkout__input-address"
             onChange={ ({ target }) => setDeliveryAddress(target.value) }
+            required
           />
         </label>
         <label htmlFor="addressNumber">
           Número:
           <input
+            required
             type="number"
+            value={ deliveryNumber }
             id="addressNumber"
             data-testid="customer_checkout__input-address-number"
             onChange={ ({ target }) => setDeliveryNumber(target.value) }
@@ -108,7 +111,7 @@ function DeliveryData({ totalPrice, cart }) {
           type="button"
           id="submitOrder"
           data-testid="customer_checkout__button-submit-order"
-          value="Finalizar Pedido"
+          // value="Finalizar Pedido"
           onClick={ () => finishOrder(deliveryData) }
         >
           Finalizar Pedido

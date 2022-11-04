@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import RedirectLogin from './Components/Redirect';
 import Login from './Pages/Login';
 import RegisterComponent from './Pages/Register';
+import MyOrders from './Pages/MyOrders';
 import Products from './Pages/Products';
 import CustomerCheckout from './Pages/CustomerCheckout';
 import MyContext from './context/store';
@@ -33,6 +34,7 @@ function App() {
         <Route path="/login" element={ <Login /> } />
         <Route path="/register" element={ <RegisterComponent /> } />
         <Route path="/customer/orders/:id" element={ <OrderById /> } />
+        <Route path="/customer/orders" element={ <MyOrders /> } />
 
         <Route
           path="/customer/products"
