@@ -38,6 +38,11 @@ const salesService = {
     const sales = await Sale.findAll();
     return sales;
   },
+
+  getSalesById: async (id) => {
+    const sales = await Sale.findAll({ where: { userId: id } });
+    return sales;
+  },
 };
 
 module.exports = salesService;
