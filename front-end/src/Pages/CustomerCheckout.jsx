@@ -1,40 +1,29 @@
-import { /* useContext, */ useState/* , useEffect  */ } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import CheckoutCard from '../Components/CheckoutCard';
 import DeliveryData from '../Components/DeliveryData';
 import Navbar from '../Components/Navbar';
-// import MyContext from '../context/store';
-
-const produtosPedidos = [
-  {
-    id: 1,
-    productId: 1,
-    name: 'heineken',
-    quantity: 2,
-    unitPrice: 5.5,
-    subTotal: 11,
-  },
-  {
-    id: 2,
-    productId: 2,
-    name: 'tequila',
-    quantity: 3,
-    unitPrice: 5,
-    subTotal: 15,
-  },
-];
+import MyContext from '../context/store';
 
 function CustomerCheckout() {
-  const semiTotal = produtosPedidos.reduce((acc, { subTotal }) => acc + subTotal, 0);
-  const [cart, setCart] = useState(produtosPedidos);
-  const [total, setTotal] = useState(semiTotal);
-  /* const theme = useContext(MyContext);
+  const theme = useContext(MyContext);
 
-  console.log(theme); */
+  const [cart, setCart] = useState([]);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    const semiTotal = theme.saller.reduce((acc, item) => {
+      const { quantity, price } = item;
+      return acc + (quantity * price);
+    }, 0);
+    setTotal(semiTotal);
+    setCart(theme.saller);
+  }, [theme.saller]);
 
   const removeItem = (id) => {
-    const newCart = cart.filter((item) => item.id !== id);
+    /* const newCart = cart.filter((item) => item.id !== id);
     setTotal(newCart.reduce((acc, { subTotal }) => acc + subTotal, 0));
-    setCart(newCart);
+    setCart(newCart); */
+    theme.spendInheritance({ id, quantity: 0 });
 
     return true;
   };
@@ -56,13 +45,14 @@ function CustomerCheckout() {
         </thead>
         <tbody>
           {cart.map((product) => {
-            const { id, name, quantity, unitPrice, subTotal } = product;
+            const { id, title, quantity, price } = product;
+            const subTotal = quantity * price;
             return (
               <CheckoutCard
                 id={ id }
-                name={ name }
+                name={ title }
                 quantity={ quantity }
-                unitPrice={ unitPrice }
+                unitPrice={ price }
                 subTotal={ subTotal }
                 removeItem={ removeItem }
                 key={ id }
