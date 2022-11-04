@@ -12,8 +12,8 @@ function Card({ image, title, price, id }) {
   });
 
   useEffect(() => {
-    theme.spendInheritance({ id, quantity, price });
-  }, [quantity, id, price]);
+    theme.spendInheritance({ id, quantity, price, title });
+  }, [quantity, id, price, title]);
 
   return (
     <div>
