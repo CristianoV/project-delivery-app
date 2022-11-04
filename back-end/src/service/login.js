@@ -20,7 +20,7 @@ const login = async (email, password) => {
       message: 'Invalid password',
     };
   }
-  const { password: userPass, id: userId, ...userWithoutPassword } = findUser.dataValues;
+  const { password: userPass, ...userWithoutPassword } = findUser.dataValues;
   const token = tokenHelper.createToken(userWithoutPassword);
   return { token, ...userWithoutPassword };
 };
