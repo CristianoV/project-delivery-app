@@ -28,7 +28,7 @@ const salesService = {
           deliveryAddress,
           deliveryNumber,
           saleDate: getDateForNewSale(),
-          status: 'pendente',
+          status: 'Pendente',
         },
       );
       if (!newSale) return null;

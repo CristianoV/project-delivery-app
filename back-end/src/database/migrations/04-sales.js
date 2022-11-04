@@ -31,7 +31,7 @@ module.exports = {
           onDelete: 'CASCADE',
       },        
       totalPrice: {
-        type: Sequelize.DOUBLE(9,2),
+        type: Sequelize.DECIMAL(9,2),
         allowNull: false,
         field: 'total_price',
       },
