@@ -49,7 +49,6 @@ function DeliveryData({ totalPrice, cart }) {
 
   const finishOrder = async (orderData) => {
     const STATUS_CREATED = 201;
-    console.log(orderData);
     try {
       if (!user) {
         navigation('/login');
