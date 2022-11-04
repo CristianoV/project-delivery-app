@@ -10,6 +10,11 @@ function CustomerCheckout() {
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
 
+  const priceFormat = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  });
+
   useEffect(() => {
     const semiTotal = theme.saller.reduce((acc, item) => {
       const { quantity, price } = item;
@@ -44,12 +49,12 @@ function CustomerCheckout() {
           </tr>
         </thead>
         <tbody>
-          {cart.map((product) => {
+          {cart.map((product, index) => {
             const { id, title, quantity, price } = product;
-            const subTotal = quantity * price;
+            const subTotal = (quantity * price).toFixed(2);
             return (
               <CheckoutCard
-                id={ id }
+                id={ index }
                 name={ title }
                 quantity={ quantity }
                 unitPrice={ price }
@@ -64,8 +69,8 @@ function CustomerCheckout() {
       <div
         data-testid="customer_checkout__element-order-total-price"
       >
-        Total: R$
-        {total}
+        Total:
+        {priceFormat.format(total)}
       </div>
       <DeliveryData totalPrice={ total } />
     </div>

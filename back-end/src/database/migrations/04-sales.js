@@ -12,23 +12,23 @@ module.exports = {
           type: Sequelize.INTEGER,
           allowNull: false,
           field: 'user_id',
-          /* references: {
+          references: {
               model: 'users',
               key: 'id',
           },
           onUpdate: 'CASCADE',
-          onDelete: 'CASCADE', */
+          onDelete: 'CASCADE',
         },
       sellerID: {
           type: Sequelize.INTEGER,
           allowNull: false,
           field: 'seller_id',
-          /* references: {
+          references: {
               model: 'users',
               key: 'id',
           },
           onUpdate: 'CASCADE',
-          onDelete: 'CASCADE', */
+          onDelete: 'CASCADE',
       },        
       totalPrice: {
         type: Sequelize.DOUBLE(9,2),
