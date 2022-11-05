@@ -10,7 +10,7 @@ const salesController = {
     const { id } = req.params;
     const sale = await salesService.selectAllSalesByUserId(id)
     return res.status(201).json(sale);
-  }
+  },
   getSales: async (_req, res) => {
     const sales = await salesService.getSales();
     return res.status(200).json(sales);

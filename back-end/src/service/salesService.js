@@ -44,8 +44,7 @@ const salesService = {
       ],
     });
     return sale;
-  }
-
+  },
   getSales: async () => {
     const sales = await Sale.findAll();
     return sales;
