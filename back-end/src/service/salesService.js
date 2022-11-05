@@ -1,4 +1,5 @@
 const { Sale, SaleProduct } = require('../database/models');
+const { product } = require('../database/models');
 const getDateForNewSale = require('../helpers/getDate');
 
 const createSaleProducts = async (products, idSale) => {
@@ -36,6 +37,17 @@ const salesService = {
 
       return newSale;
   },
+  selectAllSalesByUserId: async (id) => {
+    const sale = await Sale.findAll({
+      where: { id },
+      include: [
+        {
+          all: true, nested: true,
+        },
+      ],
+    });
+    return sale;
+  }
 };
 
 module.exports = salesService;
