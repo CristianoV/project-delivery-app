@@ -33,7 +33,17 @@ const salesService = {
 
       return newSale;
   },
-
+  selectAllSalesByUserId: async (id) => {
+    const sale = await Sale.findAll({
+      where: { id },
+      include: [
+        {
+          all: true, nested: true,
+        },
+      ],
+    });
+    return sale;
+  },
   getSales: async () => {
     const sales = await Sale.findAll();
     return sales;

@@ -19,6 +19,7 @@ app.get('/products', validateToken, clientController.getAllProducts);
 app.post('/login', loginController.login);
 app.post('/register', registerController.register);
 
+app.get('/user/orders/:id', validateToken, salesController.selectAllSalesByUserId);
 app.get('/users/sellers', validateToken, userController.getSellers);
 
 app.post('/sales', validateToken, salesController.createSale);
