@@ -8,7 +8,7 @@ const salesController = {
   },
   selectAllSalesByUserId: async (req, res) => {
     const { id } = req.params;
-    const sale = await salesService.selectAllSalesByUserId(id)
+    const sale = await salesService.selectAllSalesByUserId(id);
     return res.status(201).json(sale);
   },
   getSales: async (_req, res) => {

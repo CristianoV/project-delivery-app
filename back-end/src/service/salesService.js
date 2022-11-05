@@ -1,5 +1,4 @@
 const { Sale, SaleProduct } = require('../database/models');
-const { product } = require('../database/models');
 const getDateForNewSale = require('../helpers/getDate');
 
 const createSaleProducts = async (products, idSale) => {
