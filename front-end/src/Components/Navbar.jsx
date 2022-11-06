@@ -34,7 +34,7 @@ function Navbar() {
           </Link>
         </>
       )}
-      {/* {page === 'manage' && (
+      {/* {pageRigth === 'manage' && (
         <button
           type="button"
           data-testid="customer_products__element-navbar-link-orders"
@@ -42,16 +42,16 @@ function Navbar() {
         >
           GERENCIAR USUÁRIOS
         </button>
-      )}
-      {page === 'requests' && (
+      )} */}
+      {pageRigth === 'seller' && (
         <button
           type="button"
           data-testid="customer_products__element-navbar-link-orders"
-          onClick={ () => navigation('/login') }
+          onClick={ () => navigation('/seller/orders') }
         >
           PEDIDOS
         </button>
-      )} */}
+      )}
 
       <h1 data-testid="customer_products__element-navbar-user-full-name">
         {user && user.name}
