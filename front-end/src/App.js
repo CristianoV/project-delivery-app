@@ -8,6 +8,8 @@ import Products from './Pages/Products';
 import CustomerCheckout from './Pages/CustomerCheckout';
 import MyContext from './context/store';
 import OrderDetail from './Pages/OrderDetail';
+import SellerOrders from './Pages/SellerOrders';
+import SellerOrderDetails from './Pages/SellerOrderDetails';
 
 function App() {
   const [saller, setSaller] = useState([]);
@@ -35,6 +37,8 @@ function App() {
         <Route path="/register" element={ <RegisterComponent /> } />
         <Route path="/customer/orders/:id" element={ <OrderDetail /> } />
         <Route path="/customer/orders" element={ <MyOrders /> } />
+        <Route path="/seller/orders/:id" element={ <SellerOrderDetails /> } />
+        <Route path="/seller/orders" element={ <SellerOrders /> } />
 
         <Route
           path="/customer/products"
