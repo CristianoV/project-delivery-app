@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import CardSellerOrders from '../Components/CardSellerOrder';
+import { useEffect/* , useState */ } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+/* import CardSellerOrder from '../Components/CardSellerOrder'; */
 import Navbar from '../Components/Navbar';
 
 function SellerOrders() {
-  const [sales, setSales] = useState([]);
-  const MAX_SALES = 10;
+  /* const [sales, setSales] = useState([]);
+  const MAX_SALES = 10; */
   const navigation = useNavigate();
   const user = localStorage.getItem('user');
 
@@ -36,10 +36,13 @@ function SellerOrders() {
   return (
     <div>
       <Navbar />
-      {sales.length !== 0 && sales.map((sale, index) => {
+      <button type="button" data-testid="seller_orders__element-delivery-status-1">
+        <Link to="/seller/orders/1">Detalhes do pedido</Link>
+      </button>
+      {/* {sales.length !== 0 && sales.map((sale, index) => {
         if (index <= MAX_SALES) {
           return (
-            <CardSellerOrders
+            <CardSellerOrder
               orderId={ sale.id }
               statusOrder={ sale.status }
               date={ sale.saleDate }
@@ -51,7 +54,7 @@ function SellerOrders() {
           );
         }
         return null;
-      })}
+      })} */}
     </div>
   );
 }
