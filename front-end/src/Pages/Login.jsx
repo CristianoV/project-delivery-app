@@ -36,9 +36,10 @@ function LoginComponent() {
       });
       if (status === STATUS_OK) {
         localStorage.setItem('user', JSON.stringify(data));
+        if (data.role === 'seller') {
+          return navigate('/seller/orders');
+        }
         navigate('/customer/products');
-      } else {
-        navigate('/seller/orders');
       }
     } catch (error) {
       setwrongLogin(true);
