@@ -25,5 +25,6 @@ app.get('/users/sellers', validateToken, userController.getSellers);
 app.post('/sales', validateToken, salesController.createSale);
 app.get('/sales', validateToken, salesController.getSales);
 app.get('/sales/:id', validateToken, salesController.getSalesById);
+app.put('/sales/:id', validateToken, salesController.updateSaleStatus);
 
 module.exports = app;
