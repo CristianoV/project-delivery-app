@@ -6,6 +6,7 @@ import DetailCard from '../Components/DetailCard';
 
 function OrderDetail() {
   const [products, setProducts] = useState([]);
+
   const { salesProducts } = products;
   const { seller } = products;
   const navigation = useNavigate();
@@ -44,6 +45,18 @@ function OrderDetail() {
     }
     getUserAccount();
   }, [id, user, navigation]);
+
+  async function updateStatus(idSale) {
+    setProducts({ ...products, status: 'Entregue' });
+    const { token } = JSON.parse(user);
+    await Axios({
+      method: 'put',
+      url: `http://localhost:3001/sales/${idSale}`,
+      headers: { authorization: token },
+      data: { status: 'Entregue' },
+    });
+  }
+
   return (
     <div>
       <Navbar />
@@ -70,7 +83,8 @@ function OrderDetail() {
         <button
           data-testid="customer_order_details__button-delivery-check"
           type="button"
-          disabled={ products.status === 'Pendente' }
+          disabled={ products.status !== 'Em Trânsito' }
+          onClick={ () => updateStatus(id) }
         >
           MARCAR COMO ENTREGUE
         </button>
