@@ -40,7 +40,7 @@ export default function Products() {
     <div>
       <Navbar />
       <CartShopping />
-      <div className="flex flex-wrap gap-5">
+      <div className="flex flex-wrap gap-5 m-20">
         {products && products.map((item, index) => {
           if (index <= MAX_PRODUCTS) {
             return (
