@@ -34,7 +34,7 @@ function Navbar() {
           </Link>
         </>
       )}
-      {/* {pageRigth === 'manage' && (
+      {pageRigth === 'admin' && (
         <button
           type="button"
           data-testid="customer_products__element-navbar-link-orders"
@@ -42,7 +42,7 @@ function Navbar() {
         >
           GERENCIAR USUÁRIOS
         </button>
-      )} */}
+      )}
       {pageRigth === 'seller' && (
         <button
           type="button"
