@@ -39,6 +39,9 @@ function LoginComponent() {
         if (data.role === 'seller') {
           return navigate('/seller/orders');
         }
+        if (data.role === 'administrator') {
+          return navigate('/admin/manage');
+        }
         navigate('/customer/products');
       }
     } catch (error) {
