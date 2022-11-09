@@ -19,6 +19,12 @@ const salesController = {
     const sales = await salesService.getSalesById(req.params.id);
     return res.status(200).json(sales);
   },
+  updateSaleStatus: async (req, res) => {
+    const { id } = req.params;
+    const { status } = req.body;
+    await salesService.updateSaleStatus(id, status);
+    return res.status(204).end();
+  },
 };
 
 module.exports = salesController;
