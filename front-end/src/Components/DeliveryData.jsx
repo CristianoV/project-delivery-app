@@ -6,6 +6,10 @@ import Axios from 'axios';
 function DeliveryData({ totalPrice, cart }) {
   const user = localStorage.getItem('user');
   const navigation = useNavigate();
+  const priceFormat = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  });
 
   const [sellers, setSellers] = useState([]);
   const [sellerId, setSellerId] = useState(0);
@@ -69,12 +73,20 @@ function DeliveryData({ totalPrice, cart }) {
   };
 
   return (
-    <section>
+    <section className="flex flex-col items-center">
+      <h1
+        data-testid="customer_checkout__element-order-total-price"
+        className="text-2xl font-bold m-4 p-4 w-9/12"
+      >
+        Total:
+        {priceFormat.format(totalPrice)}
+      </h1>
       <h3>Detalhes e Endereço de Entrega</h3>
-      <form>
-        <label htmlFor="sellers">
+      <form className="border flex w-9/12 gap-8 items-center justify-center">
+        <label htmlFor="sellers" className="flex flex-col">
           Pessoa Vendedora Responsável:
           <select
+            className="border border-black rounded p-2"
             name="sellers"
             id="sellers"
             data-testid="customer_checkout__select-seller"
@@ -85,9 +97,11 @@ function DeliveryData({ totalPrice, cart }) {
             ))}
           </select>
         </label>
-        <label htmlFor="address">
+        <label htmlFor="address" className="flex flex-col">
           Endereço de Entrega:
           <input
+            className="border border-black rounded p-2"
+            placeholder="Ex: Rua dos Bobos"
             type="text"
             id="address"
             value={ deliveryAddress }
@@ -96,9 +110,11 @@ function DeliveryData({ totalPrice, cart }) {
             required
           />
         </label>
-        <label htmlFor="addressNumber">
+        <label htmlFor="addressNumber" className="flex flex-col">
           Número:
           <input
+            className="border border-black rounded p-2"
+            placeholder="Ex: 123"
             required
             type="number"
             value={ deliveryNumber }
@@ -107,16 +123,17 @@ function DeliveryData({ totalPrice, cart }) {
             onChange={ ({ target }) => setDeliveryNumber(target.value) }
           />
         </label>
-        <button
-          type="button"
-          id="submitOrder"
-          data-testid="customer_checkout__button-submit-order"
-          // value="Finalizar Pedido"
-          onClick={ () => finishOrder(deliveryData) }
-        >
-          Finalizar Pedido
-        </button>
       </form>
+      <button
+        className="border border-black rounded p-2 bg-primary text-white"
+        type="button"
+        id="submitOrder"
+        data-testid="customer_checkout__button-submit-order"
+        // value="Finalizar Pedido"
+        onClick={ () => finishOrder(deliveryData) }
+      >
+        Finalizar Pedido
+      </button>
     </section>
   );
 }

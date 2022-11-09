@@ -11,6 +11,7 @@ function DetailCard(
   return (
     <tr key={ id }>
       <td
+        className="bg-secondary text-center"
         data-testid={
           `customer_order_details__element-order-table-item-number-${id}`
         }
@@ -18,11 +19,13 @@ function DetailCard(
         {id + ONE}
       </td>
       <td
+        className="bg-[#E5E5E5] text-center"
         data-testid={ `customer_order_details__element-order-table-name-${id}` }
       >
         {name}
       </td>
       <td
+        className="bg-primary text-white text-center"
         data-testid={
           `customer_order_details__element-order-table-quantity-${id}`
         }
@@ -30,6 +33,7 @@ function DetailCard(
         {quantity}
       </td>
       <td
+        className="bg-tertiary text-white text-center"
         data-testid={
           `customer_order_details__element-order-table-unit-price-${id}`
         }
@@ -37,6 +41,7 @@ function DetailCard(
         {priceFormat.format(unitPrice)}
       </td>
       <td
+        className="bg-quaternary text-white text-center"
         data-testid={
           `customer_order_details__element-order-table-sub-total-${id}`
         }

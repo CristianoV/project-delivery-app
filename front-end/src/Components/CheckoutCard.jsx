@@ -11,6 +11,7 @@ function CheckoutCard(
   return (
     <tr key={ id }>
       <td
+        className="bg-secondary text-center"
         data-testid={
           `customer_checkout__element-order-table-item-number-${id}`
         }
@@ -18,11 +19,13 @@ function CheckoutCard(
         {id + ONE}
       </td>
       <td
+        className="bg-[#E5E5E5] text-center"
         data-testid={ `customer_checkout__element-order-table-name-${id}` }
       >
         {name}
       </td>
       <td
+        className="bg-primary text-white text-center"
         data-testid={
           `customer_checkout__element-order-table-quantity-${id}`
         }
@@ -30,6 +33,7 @@ function CheckoutCard(
         {quantity}
       </td>
       <td
+        className="bg-tertiary text-white text-center"
         data-testid={
           `customer_checkout__element-order-table-unit-price-${id}`
         }
@@ -37,15 +41,19 @@ function CheckoutCard(
         {priceFormat.format(unitPrice)}
       </td>
       <td
+        className="bg-quaternary text-white text-center"
         data-testid={
           `customer_checkout__element-order-table-sub-total-${id}`
         }
       >
         {priceFormat.format(subTotal)}
       </td>
-      <td>
+      <td
+        className="bg-secondary text-white text-center hover:text-black"
+      >
         <button
           type="button"
+          className="w-full h-full"
           data-testid={
             `customer_checkout__element-order-table-remove-${id}`
           }

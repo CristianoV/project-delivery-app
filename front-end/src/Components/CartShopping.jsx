@@ -21,14 +21,16 @@ function CartShopping() {
   }, [theme]);
 
   return (
-    <div>
+    <div className="fixed bottom-0 right-0 h-16">
       <button
+        className={ `bg-primary text-white font-bold py-2 px-4 rounded 
+        disabled:cursor-not-allowed disabled:bg-gray-400 text-2xl` }
         type="button"
         data-testid="customer_products__button-cart"
         onClick={ () => navigation('/customer/checkout') }
         disabled={ total === 0 }
       >
-        Preço total:
+        Ver Carrinho:
         <span data-testid="customer_products__checkout-bottom-value">
           {priceFormat.format(total)}
         </span>
