@@ -48,7 +48,7 @@ function Navbar() {
           </Link>
         </div>
       )}
-      {/* {page === 'manage' && (
+      {pageRigth === 'admin' && (
         <button
           type="button"
           data-testid="customer_products__element-navbar-link-orders"
@@ -57,15 +57,15 @@ function Navbar() {
           GERENCIAR USUÁRIOS
         </button>
       )}
-      {page === 'requests' && (
+      {pageRigth === 'seller' && (
         <button
           type="button"
           data-testid="customer_products__element-navbar-link-orders"
-          onClick={ () => navigation('/login') }
+          onClick={ () => navigation('/seller/orders') }
         >
           PEDIDOS
         </button>
-      )} */}
+      )}
       <div className="flex w-2/6">
         <h1
           data-testid="customer_products__element-navbar-user-full-name"

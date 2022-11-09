@@ -53,6 +53,11 @@ const salesService = {
     const sales = await Sale.findAll({ where: { userId: id } });
     return sales;
   },
+
+  updateSaleStatus: async (id, status) => {
+    await Sale.update({ status }, { where: { id } });
+    return true;
+  },
 };
 
 module.exports = salesService;

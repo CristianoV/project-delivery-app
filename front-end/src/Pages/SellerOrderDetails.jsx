@@ -2,19 +2,20 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Axios from 'axios';
 import { useEffect, useState } from 'react';
 import Navbar from '../Components/Navbar';
-import DetailCard from '../Components/DetailCard';
+import SellerDetailCard from '../Components/SellerDetailCard';
 
-function OrderDetail() {
+function SellerOrderDetails() {
   const [products, setProducts] = useState([]);
-
+  const [saleStatus, setSaleStatus] = useState('');
   const { salesProducts } = products;
-  const { seller } = products;
+
   const navigation = useNavigate();
   const { id } = useParams();
 
   const user = localStorage.getItem('user');
   const date = new Date(products.saleDate);
-  const STATUS = 'customer_order_details__element-order-details-label-delivery-status';
+
+  const STATUS = 'seller_order_details__element-order-details-label-delivery-status';
 
   const priceFormat = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
@@ -37,6 +38,7 @@ function OrderDetail() {
         });
         if (status === STATUS_OK) {
           setProducts(...data);
+          setSaleStatus(data[0].status);
         }
       } catch (error) {
         localStorage.removeItem('user');
@@ -46,60 +48,55 @@ function OrderDetail() {
     getUserAccount();
   }, [id, user, navigation]);
 
-  async function updateStatus(idSale) {
-    setProducts({ ...products, status: 'Entregue' });
-    const { token } = JSON.parse(user);
-    await Axios({
-      method: 'put',
-      url: `http://localhost:3001/sales/${idSale}`,
-      headers: { authorization: token },
-      data: { status: 'Entregue' },
-    });
-  }
+  useEffect(() => {
+    async function updateStatus() {
+      const { token } = JSON.parse(user);
+      await Axios({
+        method: 'put',
+        url: `http://localhost:3001/sales/${id}`,
+        headers: { authorization: token },
+        data: { status: saleStatus },
+      });
+    }
+    updateStatus();
+  }, [id, saleStatus, user]);
 
   return (
     <div>
       <Navbar />
       Detalhes do pedido:
-      <div className="flex gap-2 items-center justify-center">
-        <h1
-          className="font-extrabold"
-          data-testid="customer_order_details__element-order-details-label-order-id"
-        >
-          PEDIDOS:
+      <div>
+        <div data-testid="seller_order_details__element-order-details-label-order-id">
+          PEDIDO:
           {' '}
           {id}
-          ;
-        </h1>
-        <h1 data-testid="customer_order_details__element-order-details-label-seller-name">
-          P.Vend:
-          {' '}
-          {seller && seller.name}
-        </h1>
-        <h1
-          className="font-extrabold"
-          data-testid="customer_order_details__element-order-details-label-order-date"
-        >
-          {products && date.toLocaleString('pt-BR')}
-        </h1>
-        <h1
-          className="bg-[#CCB800] text-white font-bold py-2 px-4 rounded"
+        </div>
+        <div data-testid="seller_order_details__element-order-details-label-order-date">
+          {products && date.toLocaleDateString('pt-BR')}
+        </div>
+        <div
           data-testid={ STATUS }
         >
-          {products && products.status}
-        </h1>
+          {products && saleStatus}
+        </div>
         <button
-          className={ `bg-primary text-white font-bold py-2
-          px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed ` }
-          data-testid="customer_order_details__button-delivery-check"
+          data-testid="seller_order_details__button-preparing-check"
           type="button"
-          disabled={ products.status !== 'Em Trânsito' }
-          onClick={ () => updateStatus(id) }
+          onClick={ () => setSaleStatus('Preparando') }
+          disabled={ saleStatus !== 'Pendente' }
         >
-          MARCAR COMO ENTREGUE
+          PREPARAR PEDIDO
+        </button>
+        <button
+          data-testid="seller_order_details__button-dispatch-check"
+          type="button"
+          disabled={ saleStatus !== 'Preparando' }
+          onClick={ () => setSaleStatus('Em Trânsito') }
+        >
+          SAIU PARA ENTREGA
         </button>
       </div>
-      <table border="1" className="border border-black mx-auto mb-28 w-9/12">
+      <table border="1">
         <thead>
           <tr>
             <th>Item</th>
@@ -117,7 +114,7 @@ function OrderDetail() {
             const { id: productId, name, price } = product;
             const subTotal = (quantity * price).toFixed(2);
             return (
-              <DetailCard
+              <SellerDetailCard
                 id={ index }
                 name={ name }
                 quantity={ quantity }
@@ -130,11 +127,7 @@ function OrderDetail() {
           })}
         </tbody>
       </table>
-      <h1
-        className={ `bg-primary text-white font-bold py-2 px-4 rounded text-2xl
-        fixed bottom-5 right-5 h-16` }
-        data-testid="customer_order_details__element-order-total-price"
-      >
+      <h1 data-testid="seller_order_details__element-order-total-price">
         Total:
         {' '}
         {priceFormat.format(products.totalPrice)}
@@ -143,4 +136,4 @@ function OrderDetail() {
   );
 }
 
-export default OrderDetail;
+export default SellerOrderDetails;
