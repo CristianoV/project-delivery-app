@@ -43,54 +43,65 @@ function LoginComponent() {
     } catch (error) {
       setwrongLogin(true);
     }
-
-  //   if (status === STATUS_OK) {
-  //     localStorage.setItem('userLogin', JSON.stringify(data));
-  //     navigate('/costumer/products');
-  //   } else {
-  //     console.log('passou');
-  //     setwrongLogin(true);
-  //   }
   }
 
   return (
-    <form>
-      <input
-        type="email"
-        data-testid="common_login__input-email"
-        placeholder="email@email.com"
-        value={ email }
-        onChange={ ({ target }) => setEmail(target.value) }
-      />
-      <input
-        type="password"
-        data-testid="common_login__input-password"
-        placeholder="*******"
-        value={ password }
-        onChange={ ({ target }) => setPassword(target.value) }
-      />
-      <button
-        type="button"
-        data-testid="common_login__button-login"
-        disabled={ handleDisableButton() }
-        onClick={ () => login() }
+    <div>
+      <form
+        className="flex justify-center flex-col items-center gap-3 bg-[#E5E5E5]
+      w-96 h-96 m-auto mt-20 place-content-center font-roboto shadow-lg rounded-lg"
       >
-        LOGIN
-      </button>
-      <button
-        type="button"
-        data-testid="common_login__button-register"
-        onClick={ () => navigate('/register') }
-      >
-        Ainda não tenho uma conta
-      </button>
-      {wrongLogin && (
-        <h6
-          data-testid="common_login__element-invalid-email"
+        <label htmlFor="email" className="flex flex-col">
+          Login
+          <input
+            className="border border-[#001813] rounded-md p-1 w-80 h-11 shadow-md"
+            type="email"
+            data-testid="common_login__input-email"
+            placeholder="email@email.com"
+            id="email"
+            value={ email }
+            onChange={ ({ target }) => setEmail(target.value) }
+          />
+        </label>
+        <label htmlFor="password" className="flex flex-col">
+          Senha
+          <input
+            className="border border-[#001813] rounded-md p-1 w-80 h-11 shadow-md"
+            type="password"
+            data-testid="common_login__input-password"
+            placeholder="*******"
+            id="password"
+            value={ password }
+            onChange={ ({ target }) => setPassword(target.value) }
+          />
+        </label>
+        {wrongLogin && (
+          <h6
+            data-testid="common_login__element-invalid-email"
+            className="text-danger text-sm font-bold text-center"
+          >
+            Senha ou Login inválidos
+          </h6>)}
+        <button
+          className="bg-primary rounded-lg w-80 h-11 text-white
+          disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#036B59]"
+          type="button"
+          data-testid="common_login__button-login"
+          disabled={ handleDisableButton() }
+          onClick={ () => login() }
         >
-          Não deu certo
-        </h6>)}
-    </form>
+          LOGIN
+        </button>
+        <button
+          className="border-2 border-primary rounded-lg w-80 h-11 text-primary"
+          type="button"
+          data-testid="common_login__button-register"
+          onClick={ () => navigate('/register') }
+        >
+          Ainda não tenho uma conta
+        </button>
+      </form>
+    </div>
   );
 }
 
