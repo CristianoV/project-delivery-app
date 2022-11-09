@@ -20,7 +20,7 @@ function App() {
       if (newSaller.length === 0 && x.quantity === 0) return setSaller([...saller]);
       newSaller[0].quantity = x.quantity;
       if (newSaller[0].quantity === 0) {
-        return setSaller(saller.filter((item) => item.id !== x.id));
+        return setSaller(saller.filter((item) => item.quantity !== 0));
       }
       return setSaller([...saller]);
     };
