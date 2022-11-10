@@ -48,23 +48,30 @@ function Navbar() {
           </Link>
         </div>
       )}
-      {pageRigth === 'admin' && (
-        <button
-          type="button"
-          data-testid="customer_products__element-navbar-link-orders"
-          onClick={ () => navigation('/login') }
-        >
-          GERENCIAR USUÁRIOS
-        </button>
+      {pageRigth[1] === 'admin' && (
+        <div className="bg-primary w-4/6 flex items-center text-white gap-5">
+          <Link
+            className={ `text-lg w-2/6 font-bold cursor-pointer 
+            flex justify-center items-center` }
+            type="button"
+            data-testid="customer_products__element-navbar-link-orders"
+            to="/admin/manage"
+          >
+            GERENCIAR USUÁRIOS
+          </Link>
+        </div>
       )}
-      {pageRigth === 'seller' && (
-        <button
-          type="button"
-          data-testid="customer_products__element-navbar-link-orders"
-          onClick={ () => navigation('/seller/orders') }
-        >
-          PEDIDOS
-        </button>
+      {pageRigth[1] === 'seller' && (
+        <div className="bg-primary w-4/6 flex items-center text-white gap-5">
+          <Link
+            className={ `text-lg w-2/6 font-bold cursor-pointer 
+            flex justify-center items-center` }
+            data-testid="customer_products__element-navbar-link-orders"
+            to="/seller/orders"
+          >
+            PEDIDOS
+          </Link>
+        </div>
       )}
       <div className="flex w-2/6">
         <h1
