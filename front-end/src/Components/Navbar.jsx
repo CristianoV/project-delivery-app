@@ -25,9 +25,9 @@ function Navbar() {
             className={
               pageRigth[2] === 'products'
                 ? `text-lg font-bold cursor-pointer bg-secondary 
-                h-24 w-2/6 flex justify-center items-center`
+                h-24 w-2/6 flex justify-center items-center cel:w-3/6`
                 : `text-lg w-2/6 font-bold cursor-pointer 
-                flex justify-center items-center`
+                flex justify-center items-center cel:w-3/6`
             }
           >
             PRODUTOS
@@ -39,9 +39,9 @@ function Navbar() {
             className={
               pageRigth[2] === 'orders'
                 ? `text-lg font-bold cursor-pointer bg-secondary 
-              h-24 w-2/6 flex justify-center items-center`
+              h-24 w-2/6 flex justify-center items-center cel:w-3/6`
                 : `text-lg w-2/6 font-bold cursor-pointer 
-              flex justify-center items-center`
+              flex justify-center items-center cel:w-3/6`
             }
           >
             MEUS PEDIDOS
