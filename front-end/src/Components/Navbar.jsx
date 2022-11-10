@@ -18,7 +18,7 @@ function Navbar() {
   return (
     <nav className="flex justify-between h-24 w-auto">
       {pageRigth[1] === 'customer' && (
-        <div className="bg-primary w-4/6 flex items-center text-white gap-5">
+        <div className="bg-primary w-4/6 flex items-center text-white gap-5 text-center">
           <Link
             to="/customer/products"
             data-testid="customer_products__element-navbar-link-products"
@@ -77,7 +77,7 @@ function Navbar() {
         <h1
           data-testid="customer_products__element-navbar-user-full-name"
           className="text-lg font-bold bg-tertiary w-3/4 flex
-          items-center justify-center text-white"
+          items-center justify-center text-white text-center"
         >
           {user && user.name}
         </h1>

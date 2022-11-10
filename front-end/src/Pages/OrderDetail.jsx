@@ -58,10 +58,10 @@ function OrderDetail() {
   }
 
   return (
-    <div>
+    <div className="flex flex-col">
       <Navbar />
-      Detalhes do pedido:
-      <div className="flex gap-2 items-center justify-center">
+      <h1 className="self-center font-bold mt-8">Detalhes do pedido:</h1>
+      <div className="flex gap-2 items-center justify-center flex-wrap">
         <h1
           className="font-extrabold"
           data-testid="customer_order_details__element-order-details-label-order-id"

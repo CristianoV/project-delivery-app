@@ -26,9 +26,9 @@ function CustomerCheckout() {
   };
 
   return (
-    <div>
+    <div className="flex flex-col">
       <Navbar />
-      <h3>Finalizar pedido</h3>
+      <h1 className="self-center font-bold mt-8">Finalizar pedido</h1>
       <table border="1" className="border border-black m-auto w-9/12">
         <thead>
           <tr>

@@ -82,7 +82,7 @@ function DeliveryData({ totalPrice, cart }) {
         {priceFormat.format(totalPrice)}
       </h1>
       <h3>Detalhes e Endereço de Entrega</h3>
-      <form className="border flex w-9/12 gap-8 items-center justify-center">
+      <form className="border sm:flex w-9/12 gap-8 items-center justify-center">
         <label htmlFor="sellers" className="flex flex-col">
           Pessoa Vendedora Responsável:
           <select
@@ -125,7 +125,7 @@ function DeliveryData({ totalPrice, cart }) {
         </label>
       </form>
       <button
-        className="border border-black rounded p-2 bg-primary text-white"
+        className="border border-black rounded p-2 bg-primary text-white m-8"
         type="button"
         id="submitOrder"
         data-testid="customer_checkout__button-submit-order"
