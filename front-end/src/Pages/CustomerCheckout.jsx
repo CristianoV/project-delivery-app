@@ -10,11 +10,6 @@ function CustomerCheckout() {
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
 
-  const priceFormat = new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  });
-
   useEffect(() => {
     const semiTotal = theme.saller.reduce((acc, item) => {
       const { quantity, price } = item;
@@ -31,10 +26,10 @@ function CustomerCheckout() {
   };
 
   return (
-    <div>
+    <div className="flex flex-col">
       <Navbar />
-      <h3>Finalizar pedido</h3>
-      <table border="1">
+      <h1 className="self-center font-bold mt-8">Finalizar pedido</h1>
+      <table border="1" className="border border-black m-auto w-9/12">
         <thead>
           <tr>
             <th>Item</th>
@@ -64,12 +59,6 @@ function CustomerCheckout() {
           })}
         </tbody>
       </table>
-      <div
-        data-testid="customer_checkout__element-order-total-price"
-      >
-        Total:
-        {priceFormat.format(total)}
-      </div>
       <DeliveryData totalPrice={ total } cart={ theme.saller } />
     </div>
   );

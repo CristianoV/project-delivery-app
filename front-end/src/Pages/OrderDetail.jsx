@@ -58,29 +58,39 @@ function OrderDetail() {
   }
 
   return (
-    <div>
+    <div className="flex flex-col">
       <Navbar />
-      Detalhes do pedido:
-      <div>
-        <h1 data-testid="customer_order_details__element-order-details-label-order-id">
+      <h1 className="self-center font-bold mt-8">Detalhes do pedido:</h1>
+      <div className="flex gap-2 items-center justify-center flex-wrap">
+        <h1
+          className="font-extrabold"
+          data-testid="customer_order_details__element-order-details-label-order-id"
+        >
           PEDIDOS:
           {' '}
           {id}
+          ;
         </h1>
         <h1 data-testid="customer_order_details__element-order-details-label-seller-name">
           P.Vend:
           {' '}
           {seller && seller.name}
         </h1>
-        <h1 data-testid="customer_order_details__element-order-details-label-order-date">
+        <h1
+          className="font-extrabold"
+          data-testid="customer_order_details__element-order-details-label-order-date"
+        >
           {products && date.toLocaleString('pt-BR')}
         </h1>
         <h1
+          className="bg-[#CCB800] text-white font-bold py-2 px-4 rounded"
           data-testid={ STATUS }
         >
           {products && products.status}
         </h1>
         <button
+          className={ `bg-primary text-white font-bold py-2
+          px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed ` }
           data-testid="customer_order_details__button-delivery-check"
           type="button"
           disabled={ products.status !== 'Em Trânsito' }
@@ -89,7 +99,7 @@ function OrderDetail() {
           MARCAR COMO ENTREGUE
         </button>
       </div>
-      <table border="1">
+      <table border="1" className="border border-black mx-auto mb-28 w-9/12">
         <thead>
           <tr>
             <th>Item</th>
@@ -120,7 +130,11 @@ function OrderDetail() {
           })}
         </tbody>
       </table>
-      <h1 data-testid="customer_order_details__element-order-total-price">
+      <h1
+        className={ `bg-primary text-white font-bold py-2 px-4 rounded text-2xl
+        fixed bottom-5 right-5 h-16` }
+        data-testid="customer_order_details__element-order-total-price"
+      >
         Total:
         {' '}
         {priceFormat.format(products.totalPrice)}

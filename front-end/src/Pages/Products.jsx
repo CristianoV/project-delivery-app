@@ -40,20 +40,22 @@ export default function Products() {
     <div>
       <Navbar />
       <CartShopping />
-      {products && products.map((item, index) => {
-        if (index <= MAX_PRODUCTS) {
-          return (
-            <Card
-              image={ item.url_Image }
-              title={ item.name }
-              price={ item.price }
-              id={ item.id }
-              key={ item.id }
-            />
-          );
-        }
-        return null;
-      })}
+      <div className="flex flex-wrap gap-5 m-20">
+        {products && products.map((item, index) => {
+          if (index <= MAX_PRODUCTS) {
+            return (
+              <Card
+                image={ item.url_Image }
+                title={ item.name }
+                price={ item.price }
+                id={ item.id }
+                key={ item.id }
+              />
+            );
+          }
+          return null;
+        })}
+      </div>
     </div>
   );
 }

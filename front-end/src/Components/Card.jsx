@@ -16,19 +16,21 @@ function Card({ image, title, price, id }) {
   }, [quantity, id, price, title]);
 
   return (
-    <div>
+    <div className="border flex flex-col items-center m-auto w-60">
       <img
         data-testid={ `customer_products__img-card-bg-image-${id}` }
+        className="h-60"
         src={ image }
         alt={ title }
       />
-      <div>
+      <div className="flex flex-col items-center">
         <h3 data-testid={ `customer_products__element-card-title-${id}` }>{title}</h3>
         <p data-testid={ `customer_products__element-card-price-${id}` }>
           {priceFormat.format(price)}
         </p>
-        <div>
+        <div className="flex justify-between">
           <button
+            className="bg-primary text-white font-bold py-2 px-4 rounded-l"
             type="button"
             data-testid={ `customer_products__button-card-rm-item-${id}` }
             onClick={ () => quantity > 0 && setQuantity(quantity - 1) }
@@ -36,6 +38,7 @@ function Card({ image, title, price, id }) {
             -
           </button>
           <input
+            className="text-center w-10 h-10 border border-gray-300"
             type="number"
             data-testid={ `customer_products__input-card-quantity-${id}` }
             name=""
@@ -49,6 +52,7 @@ function Card({ image, title, price, id }) {
             } }
           />
           <button
+            className="bg-primary text-white font-bold py-2 px-4 rounded-r"
             type="button"
             data-testid={ `customer_products__button-card-add-item-${id}` }
             onClick={ () => setQuantity(quantity + 1) }
