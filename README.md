@@ -1,4 +1,8 @@
-# TRYBEER
+<h1 align="center"> TRYBEER </H1>
+
+<p align="center">
+  <img src="DeliveryAPP.gif" alt="animated" />
+</p>
 
 Projeto da [Trybe](https://www.betrybe.com/ "Trybe") - Aplicação Fullstack de um App de bebidas, utilizando React.js e Node.js.
 
