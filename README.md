@@ -1,6 +1,6 @@
 <h1 align="center"> TRYBEER </H1>
 
-<p align="center">
+<p align="center"> 
   <img src="DeliveryAPP.gif" alt="animated" />
 </p>
 
